@@ -9,10 +9,6 @@ pipeline {
 
     stages {
 		
-		stage('clean') {
-			
-		}
-		
         stage('build') {
             steps {
                 git(
@@ -60,7 +56,6 @@ pipeline {
                 
                 cleanup {
                    sh 'mvn -Dusername=git release:clean'
-				   cleanWs()
                 }
             }
 			
