@@ -9,14 +9,18 @@ pipeline {
 
     stages {
 		stage('Build_Nightly'){
-			jobs = [
-				'sample_spring_boot_release',
-				'sample-node-webpack-app-release'
-				]
+			steps {
+				script {
+					def jobs = [
+						'sample_spring_boot_release',
+						'sample-node-webpack-app-release'
+						]
     
-			for (int i = 0; i < jobs.size(); i++) {
-				def buildResults = build job: jobs.get(i), wait: true
-				println "The result of the downstream job is: ${buildResults.result}"
+					for (int i = 0; i < jobs.size(); i++) {
+						def buildResults = build job: jobs.get(i), wait: true
+						println "The result of the downstream job is: ${buildResults.result}"
+					}
+				}
 			}
 			
 			post {
