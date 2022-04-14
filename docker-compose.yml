@@ -6,13 +6,12 @@ services:
     container_name: 'jenkins'
     environment:
         JAVA_OPTS: "-Djava.awt.headless=true"
-        NEXUS_URL: "http://nexus:8081"
+        NEXUS_URL: "http://nexus3:8081"
     ports:
       - '8080:8080'
       - "50000:50000"
     volumes:
       - 'jenkins_data:/var/jenkins_home'
-      - "C:/Users/gpulina/projects/project-release-demo:/app/projects/project-release-demo"
   nexus:
     image: sonatype/nexus:oss
     container_name: 'nexus'
@@ -20,8 +19,16 @@ services:
       - "nexus-data:/sonatype-work"
     ports:
       - "8081:8081"
+  nexus3:
+    image: sonatype/nexus3
+    container_name: 'nexus3'
+    volumes:
+      - "nexus3-data:/sonatype-work"
+    ports:
+      - "8082:8081"
 
 volumes:
   nexus-data: {}
+  nexus3-data: {}
   jenkins_data:
     driver: local
