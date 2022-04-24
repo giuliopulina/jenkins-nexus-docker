@@ -45,6 +45,10 @@ pipeline {
                      sh 'mvn -Dusername=git -DNEXUS_USERNAME=${NEXUS_USERNAME} -DNEXUS_PASSWORD=${NEXUS_PASSWORD} -s settings.xml --batch-mode clean release:clean release:prepare release:perform'
                   }
                 }
+				
+				script {
+					env.OUTPUT_VAR = "TEST_OUTPUT_VAR"
+				}
             }
             post {
                 failure {
